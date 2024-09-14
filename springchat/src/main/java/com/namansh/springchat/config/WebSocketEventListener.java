@@ -25,10 +25,10 @@ public class WebSocketEventListener {
         String username = (String)headerAccessor.getSessionAttributes().get("username");
         if (username!= null){
             log.info("User Disconnected {}",username);
-            String chatMessage = ChatMessage.builder()
+            String chatMessage = String.valueOf(ChatMessage.builder()
                     .Type(MessageType.LEAVE)
                     .Sender(username)
-                    .build();
+                    .build());
             messageTemplate.convertAndSend("/topic/public",chatMessage);
         }
     }
